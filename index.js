@@ -26,11 +26,13 @@ app.get("/sheet-data", async (req, res) => {
 
     res.json({ data: response.data.values });
   } catch (error) {
-    console.error("Error fetching sheet data:", error);
+    console.error("Error fetching sheet data:", error.response?.data || error.message || error);
     res.status(500).send("Failed to fetch data");
   }
 });
 
+
 // ✅ MOST IMPORTANT: Use process.env.PORT for Render
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+

@@ -1,8 +1,8 @@
 const express = require("express");
 const cors = require("cors");
 const { google } = require("googleapis");
-const swaggerUi = require("swagger-ui-express");
-const swaggerJsdoc = require("swagger-jsdoc");
+//const swaggerUi = require("swagger-ui-express");
+//const swaggerJsdoc = require("swagger-jsdoc");
 
 // Use environment variable or fallback to local file (for local dev)
 const keys = process.env.GOOGLE_CREDENTIALS

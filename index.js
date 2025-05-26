@@ -1,14 +1,14 @@
 const express = require("express");
 const cors = require("cors");
 const { google } = require("googleapis");
-const keys = require("./keys.json"); // This is your service account file
+const keys = require("./keys.json");
 
 const app = express();
 app.use(cors());
 
 const auth = new google.auth.GoogleAuth({
   credentials: keys,
-  scopes: ["https://www.googleapis.com/auth/spreadsheets.readonly"]
+  scopes: ["https://www.googleapis.com/auth/spreadsheets.readonly"],
 });
 
 app.get("/sheet-data", async (req, res) => {
@@ -16,12 +16,12 @@ app.get("/sheet-data", async (req, res) => {
     const client = await auth.getClient();
     const sheets = google.sheets({ version: "v4", auth: client });
 
-    const spreadsheetId = "1y8tWyUmdhudmiDf47x38GEA1XGgSwRdsyJTIDnCnvPA"; // Replace this
-    const range = "Sheet1!A1:D10"; // Adjust range if needed
+    const spreadsheetId = "1y8tWyUmdhudmiDf47x38GEA1XGgSwRdsyJTIDnCnvPA";
+    const range = "Sheet1!A1:D10";
 
     const response = await sheets.spreadsheets.values.get({
       spreadsheetId,
-      range
+      range,
     });
 
     res.json({ data: response.data.values });
@@ -31,8 +31,6 @@ app.get("/sheet-data", async (req, res) => {
   }
 });
 
-//app.listen(3000, () => console.log("Server running at http://localhost:3000"));
-
+// ✅ MOST IMPORTANT: Use process.env.PORT for Render
 const PORT = process.env.PORT || 3000;
-
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

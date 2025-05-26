@@ -1,7 +1,11 @@
 const express = require("express");
 const cors = require("cors");
 const { google } = require("googleapis");
-const keys = require("./keys.json");
+
+// Use environment variable or fallback to local file (for local dev)
+const keys = process.env.GOOGLE_CREDENTIALS
+  ? JSON.parse(process.env.GOOGLE_CREDENTIALS)
+  : require("./keys.json");
 
 const app = express();
 app.use(cors());
@@ -31,8 +35,6 @@ app.get("/sheet-data", async (req, res) => {
   }
 });
 
-
-// ✅ MOST IMPORTANT: Use process.env.PORT for Render
+// Use port from environment (required by Render), fallback to 3000 locally
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
-

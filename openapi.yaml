@@ -1,14 +1,16 @@
-openapi: 3.0.1
+openapi: 3.0.0
 info:
-  title: Google Sheet Invoice Data API
-  description: Fetches invoice data from a Google Sheet.
+  title: Google Sheet Invoice API
+  description: API to retrieve invoice data from Google Sheets
   version: 1.0.0
+
 servers:
   - url: https://google-sheets-api-xkwq.onrender.com
+
 paths:
   /sheet-data:
     get:
-      summary: Get invoice data
+      summary: Get invoice data from Google Sheets
       operationId: getSheetData
       responses:
         '200':
